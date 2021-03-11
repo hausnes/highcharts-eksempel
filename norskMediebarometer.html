@@ -5,7 +5,44 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Norsk mediebarometer</title>
+    <script src="https://code.highcharts.com/highcharts.js"></script>
+    <script src="https://code.highcharts.com/modules/exporting.js"></script>
+    <script src="https://code.highcharts.com/modules/export-data.js"></script>
+    <script src="https://code.highcharts.com/modules/accessibility.js"></script>
     <style>
+        /* Generelle innstillingar */
+        html, body {
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            background-color: midnightblue;
+        }
+
+        h1 {
+            background-color: black;
+            color: white;
+            text-align: center;
+            padding: 20px;
+        }
+
+        article {
+            width: 50%;
+            margin: 0 auto;
+            border-left: 1px solid black;
+            padding: 20px;
+            background-color: white;
+        }
+
+        img {
+            max-width: 90%;
+        }
+
+        /* Highcharts */
         .highcharts-figure, .highcharts-data-table table {
             min-width: 310px; 
             max-width: 800px;
@@ -46,27 +83,33 @@
     </style>
 </head>
 <body>
-    <script src="https://code.highcharts.com/highcharts.js"></script>
-    <script src="https://code.highcharts.com/modules/exporting.js"></script>
-    <script src="https://code.highcharts.com/modules/export-data.js"></script>
-    <script src="https://code.highcharts.com/modules/accessibility.js"></script>
-
-    <figure class="highcharts-figure">
-        <div id="container"></div>
-        <p class="highcharts-description">
-            This demo shows how breakpoints can be defined in order to
-            change the chart options depending on the screen width. All
-            charts automatically scale to the container size, but in this
-            case we also change the positioning of the legend and axis
-            elements to accomodate smaller screens.
-        </p>
-    </figure>
-
-    <div id="button-bar">
-        <button id="small">Small</button>
-        <button id="large">Large</button>
-        <button id="auto">Auto</button>
-    </div>
+    <article>
+        <h1>Data frå SSB, visualisert vha. Highcharts</h1>
+        <figure class="highcharts-figure">
+            <div id="container"></div>
+            <p class="highcharts-description">
+                <em>Modell: Data frå SSB sin "Norsk mediebarometer", seinast oppdatert 2019.
+                Du kan lese meir hjå <a href="https://www.ssb.no/medie">Statistisk sentralbyrå</a>.</em>
+            </p>
+        </figure>
+        <section>
+            <p>
+                Statistikken kartlegger bruk av ulike medier som TV, radio, aviser, ukeblader, 
+                tegneserier, bøker, internett, ulike strømmetjenester, og tilgangen til disse. 
+            </p>
+            <p>
+                Formålet har vært å samle inn data for befolkningen for å måle bruk av og tilgang 
+                til medietilbud. Denne typen undersøkelser ble første gang gjennomført i 1991 og har 
+                deretter blitt fulgt opp med små endringer. Tidligere har SSB gjennomført lytter- og 
+                seerundersøkelser for NRK siden siste halvdel av 1960-tallet. Det har også vært noen 
+                spørsmål i levekårsundersøkelsene om kulturbruk siden 1970-tallet. 
+            </p>
+            <figure>
+                <img src="consumption-by-miko-maciaszek.jpg">
+                <figcaption>"Consumption", av Miko Maciaszek</figcaption>
+            </figure>
+        </section>
+    </article>
 
     <script>
         // Norsk mediebarometer: https://www.ssb.no/medie
@@ -109,20 +152,7 @@
             }
         },
 
-        series: mediebarometer,
-
-        /*
-        [{
-            name: 'Christmas Eve',
-            data: [1, 4, 3]
-        }, {
-            name: 'Christmas Day before dinner',
-            data: [6, 4, 2]
-        }, {
-            name: 'Christmas Day after dinner',
-            data: [8, 4, 3]
-        }],
-        */
+        series: mediebarometer, // Sjå kolleksjonen lenger oppe.
 
         responsive: {
             rules: [{
@@ -155,19 +185,6 @@
             }]
         }
         });
-
-        document.getElementById('small').addEventListener('click', function () {
-        chart.setSize(400);
-        });
-
-        document.getElementById('large').addEventListener('click', function () {
-        chart.setSize(600);
-        });
-
-        document.getElementById('auto').addEventListener('click', function () {
-        chart.setSize(null);
-        });
-
     </script>
 </body>
 </html>
